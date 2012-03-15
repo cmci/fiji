@@ -482,6 +482,7 @@ jars/mij.jar <- src-plugins/mij/pom.xml
 jars/pal-optimization.jar <- src-plugins/pal-optimization/pom.xml
 jars/wavelets.jar <- src-plugins/wavelets/pom.xml
 plugins/Refresh_Javas.jar <- src-plugins/Refresh_Javas/pom.xml
+plugins/Jython_Interpreter.jar <- src-plugins/Jython_Interpreter/pom.xml
 
 # pre-Java5 generics ;-)
 
