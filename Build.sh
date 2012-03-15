@@ -148,7 +148,7 @@ targets=$(handle_variables --strip "$@")
 variables=$(handle_variables "$@")
 
 jar=jars/fake.jar
-source_dir=src-plugins/fake
+source_dir=src-plugins/fake/src/main/java
 sources=$source_dir/fiji/build/*.java
 
 jarUpToDate () {

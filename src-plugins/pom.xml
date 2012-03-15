@@ -24,6 +24,7 @@
 		<module>fiji-lib</module>
 		<module>ij-launcher</module>
 		<module>fiji-compat</module>
+		<module>fake</module>
 	</modules>
 
 	<properties>

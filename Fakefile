@@ -470,6 +470,7 @@ jars/VIB-lib.jar <- src-plugins/VIB-lib/pom.xml
 jars/fiji-lib.jar <- src-plugins/fiji-lib/pom.xml
 jars/ij-launcher.jar <- src-plugins/ij-launcher/pom.xml
 jars/fiji-compat.jar <- src-plugins/fiji-compat/pom.xml
+jars/fake.jar <- src-plugins/fake/pom.xml
 
 # pre-Java5 generics ;-)
 
@@ -694,8 +695,3 @@ check-submodules[] <- check-ij check-TrakEM2 check-mpicbg
 
 check-ij[bin/up-to-date-check.py ImageJA precompiled/ij.jar] <-
 check-*[bin/up-to-date-check.py * precompiled/*_.jar] <-
-
-# Fake itself
-
-MAINCLASS(jars/fake.jar)=fiji.build.Fake
-jars/fake.jar <- src-plugins/fake/**/*.java
