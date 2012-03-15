@@ -25,6 +25,7 @@
 		<module>ij-launcher</module>
 		<module>fiji-compat</module>
 		<module>fake</module>
+		<module>fiji-scripting</module>
 	</modules>
 
 	<properties>

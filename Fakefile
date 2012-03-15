@@ -264,6 +264,8 @@ jars/jai_core.jar[] <-
 jars/jai_codec.jar[] <-
 jars/batik.jar[] <-
 jars/jzlib.jar[] <-
+jars/js.jar[] <-
+jars/bsh.jar[] <-
 
 # From submodules
 jars/ij.jar <- jars/javac.jar modules/ImageJA/
@@ -471,6 +473,7 @@ jars/fiji-lib.jar <- src-plugins/fiji-lib/pom.xml
 jars/ij-launcher.jar <- src-plugins/ij-launcher/pom.xml
 jars/fiji-compat.jar <- src-plugins/fiji-compat/pom.xml
 jars/fake.jar <- src-plugins/fake/pom.xml
+jars/fiji-scripting.jar <- src-plugins/fiji-scripting/pom.xml
 
 # pre-Java5 generics ;-)
 
