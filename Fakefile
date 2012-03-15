@@ -254,19 +254,6 @@ JDK(macosx)=java/macosx-java3d
 # Call the Jython script to ensure that the JDK is checked out (from Git)
 jdk[bin/checkout-jdk.py $JDK] <-
 
-# Prebuilt (needed to unconfuse Fiji Build and analyze-dependencies)
-jars/edu_mines_jtk.jar[] <-
-jars/jcommon.jar[] <-
-jars/jfreechart.jar[] <-
-jars/jna.jar[] <-
-jars/postgresql.jar[] <-
-jars/jai_core.jar[] <-
-jars/jai_codec.jar[] <-
-jars/batik.jar[] <-
-jars/jzlib.jar[] <-
-jars/js.jar[] <-
-jars/bsh.jar[] <-
-
 # From submodules
 jars/ij.jar <- jars/javac.jar modules/ImageJA/
 CLASSPATH(plugins/mpicbg_.jar)=jars/ij.jar:jars/mpicbg.jar
@@ -512,7 +499,6 @@ plugins/FFMPEG_IO.jar-cross[src-plugins/FFMPEG_IO/generate.bsh all] <- src-plugi
 # the default rules
 
 plugins/*.jar <- src-plugins/*/**/*
-jars/*.jar <- src-plugins/*/**/*
 
 # headless.jar
 
