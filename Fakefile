@@ -481,6 +481,7 @@ jars/jep.jar <- src-plugins/jep/pom.xml
 jars/mij.jar <- src-plugins/mij/pom.xml
 jars/pal-optimization.jar <- src-plugins/pal-optimization/pom.xml
 jars/wavelets.jar <- src-plugins/wavelets/pom.xml
+plugins/Refresh_Javas.jar <- src-plugins/Refresh_Javas/pom.xml
 
 # pre-Java5 generics ;-)
 

@@ -34,6 +34,7 @@
 		<module>mij</module>
 		<module>pal-optimization</module>
 		<module>wavelets</module>
+		<module>Refresh_Javas</module>
 	</modules>
 
 	<properties>
