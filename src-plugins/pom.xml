@@ -38,6 +38,7 @@
 		<module>Jython_Interpreter</module>
 		<module>Clojure_Interpreter</module>
 		<module>BeanShell_Interpreter</module>
+		<module>weave_jy2java</module>
 	</modules>
 
 	<properties>
