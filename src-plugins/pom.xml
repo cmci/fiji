@@ -32,6 +32,7 @@
 		<module>javac</module>
 		<module>jep</module>
 		<module>mij</module>
+		<module>pal-optimization</module>
 	</modules>
 
 	<properties>
