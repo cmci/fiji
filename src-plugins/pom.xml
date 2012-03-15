@@ -27,6 +27,7 @@
 		<module>fake</module>
 		<module>fiji-scripting</module>
 		<module>imagescience</module>
+		<module>imageware</module>
 	</modules>
 
 	<properties>
