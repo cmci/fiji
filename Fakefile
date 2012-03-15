@@ -478,6 +478,7 @@ jars/imageware.jar <- src-plugins/imageware/pom.xml
 jars/Jama.jar <- src-plugins/Jama/pom.xml
 jars/javac.jar <- src-plugins/javac/pom.xml
 jars/jep.jar <- src-plugins/jep/pom.xml
+jars/mij.jar <- src-plugins/mij/pom.xml
 
 # pre-Java5 generics ;-)
 
