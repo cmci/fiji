@@ -33,6 +33,7 @@
 		<module>jep</module>
 		<module>mij</module>
 		<module>pal-optimization</module>
+		<module>wavelets</module>
 	</modules>
 
 	<properties>

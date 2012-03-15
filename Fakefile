@@ -480,6 +480,7 @@ jars/javac.jar <- src-plugins/javac/pom.xml
 jars/jep.jar <- src-plugins/jep/pom.xml
 jars/mij.jar <- src-plugins/mij/pom.xml
 jars/pal-optimization.jar <- src-plugins/pal-optimization/pom.xml
+jars/wavelets.jar <- src-plugins/wavelets/pom.xml
 
 # pre-Java5 generics ;-)
 
