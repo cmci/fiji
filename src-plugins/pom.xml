@@ -36,6 +36,7 @@
 		<module>wavelets</module>
 		<module>Refresh_Javas</module>
 		<module>Jython_Interpreter</module>
+		<module>Clojure_Interpreter</module>
 	</modules>
 
 	<properties>
