@@ -26,6 +26,7 @@
 		<module>fiji-compat</module>
 		<module>fake</module>
 		<module>fiji-scripting</module>
+		<module>imagescience</module>
 	</modules>
 
 	<properties>

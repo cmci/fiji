@@ -474,6 +474,7 @@ jars/ij-launcher.jar <- src-plugins/ij-launcher/pom.xml
 jars/fiji-compat.jar <- src-plugins/fiji-compat/pom.xml
 jars/fake.jar <- src-plugins/fake/pom.xml
 jars/fiji-scripting.jar <- src-plugins/fiji-scripting/pom.xml
+jars/imagescience.jar <- src-plugins/imagescience/pom.xml
 
 # pre-Java5 generics ;-)
 
