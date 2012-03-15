@@ -37,6 +37,7 @@
 		<module>Refresh_Javas</module>
 		<module>Jython_Interpreter</module>
 		<module>Clojure_Interpreter</module>
+		<module>BeanShell_Interpreter</module>
 	</modules>
 
 	<properties>

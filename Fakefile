@@ -343,7 +343,6 @@ CLASSPATH(plugins/Refresh_Javas.jar)=jars/ij.jar:jars/fiji-scripting.jar:jars/fa
 CLASSPATH(plugins/Jython_Interpreter.jar)=jars/ij.jar:jars/fiji-scripting.jar:jars/jython.jar
 CLASSPATH(plugins/Clojure_Interpreter.jar)=jars/ij.jar:jars/fiji-scripting.jar:jars/clojure.jar
 CLASSPATH(plugins/JRuby_Interpreter.jar)=jars/ij.jar:jars/fiji-scripting.jar:jars/jruby.jar
-CLASSPATH(plugins/BeanShell_Interpreter.jar)=jars/ij.jar:jars/fiji-scripting.jar:jars/bsh.jar
 CLASSPATH(plugins/Javascript_.jar)=jars/ij.jar:jars/fiji-scripting.jar:jars/js.jar
 CLASSPATH(plugins/CLI_.jar)=jars/ij.jar:jars/fiji-scripting.jar
 MAINCLASS(plugins/Script_Editor.jar)=fiji.scripting.Script_Editor
@@ -484,6 +483,7 @@ jars/wavelets.jar <- src-plugins/wavelets/pom.xml
 plugins/Refresh_Javas.jar <- src-plugins/Refresh_Javas/pom.xml
 plugins/Jython_Interpreter.jar <- src-plugins/Jython_Interpreter/pom.xml
 plugins/Clojure_Interpreter.jar <- src-plugins/Clojure_Interpreter/pom.xml
+plugins/BeanShell_Interpreter.jar <- src-plugins/BeanShell_Interpreter/pom.xml
 
 # pre-Java5 generics ;-)
 
