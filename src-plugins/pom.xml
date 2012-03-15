@@ -30,6 +30,7 @@
 		<module>imageware</module>
 		<module>Jama</module>
 		<module>javac</module>
+		<module>jep</module>
 	</modules>
 
 	<properties>
