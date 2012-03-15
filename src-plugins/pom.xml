@@ -28,6 +28,7 @@
 		<module>fiji-scripting</module>
 		<module>imagescience</module>
 		<module>imageware</module>
+		<module>Jama</module>
 	</modules>
 
 	<properties>

@@ -476,6 +476,7 @@ jars/fake.jar <- src-plugins/fake/pom.xml
 jars/fiji-scripting.jar <- src-plugins/fiji-scripting/pom.xml
 jars/imagescience.jar <- src-plugins/imagescience/pom.xml
 jars/imageware.jar <- src-plugins/imageware/pom.xml
+jars/Jama.jar <- src-plugins/Jama/pom.xml
 
 # pre-Java5 generics ;-)
 
