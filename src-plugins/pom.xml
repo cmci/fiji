@@ -29,6 +29,7 @@
 		<module>imagescience</module>
 		<module>imageware</module>
 		<module>Jama</module>
+		<module>javac</module>
 	</modules>
 
 	<properties>

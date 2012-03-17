@@ -337,7 +337,6 @@ mainClass(jars/ij-launcher.jar)=imagej.ClassLauncher
 mainClass(jars/fiji-compat.jar)=fiji.Main
 src-plugins/fiji-compat/icon.png[cp $PRE $TARGET] <- images/icon.png
 
-MAINCLASS(jars/javac.jar)=com.sun.tools.javac.Main
 
 CLASSPATH(jars/fiji-scripting.jar)=jars/ij.jar:jars/jython.jar:jars/fiji-compat.jar:jars/bsh.jar:jars/js.jar
 CLASSPATH(plugins/Refresh_Javas.jar)=jars/ij.jar:jars/fiji-scripting.jar:jars/fake.jar:jars/fiji-compat.jar
@@ -477,6 +476,7 @@ jars/fiji-scripting.jar <- src-plugins/fiji-scripting/pom.xml
 jars/imagescience.jar <- src-plugins/imagescience/pom.xml
 jars/imageware.jar <- src-plugins/imageware/pom.xml
 jars/Jama.jar <- src-plugins/Jama/pom.xml
+jars/javac.jar <- src-plugins/javac/pom.xml
 
 # pre-Java5 generics ;-)
 
