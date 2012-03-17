@@ -21,6 +21,7 @@
 
 	<modules>
 		<module>VIB-lib</module>
+		<module>fiji-lib</module>
 	</modules>
 
 	<properties>

@@ -423,7 +423,6 @@ CLASSPATH(jars/fiji-compat.jar)=jars/ij-launcher.jar:jars/ij.jar:jars/javassist.
 CLASSPATH(plugins/TurboReg_.jar)=jars/ij.jar
 CLASSPATH(plugins/RATS_.jar)=jars/ij.jar
 CLASSPATH(plugins/Interactive_3D_Surface_Plot.jar)=jars/ij.jar
-CLASSPATH(jars/fiji-lib.jar)=jars/ij.jar
 CLASSPATH(jars/ij.jar)=jars/javac.jar
 CLASSPATH(plugins/Analyze_Reader_Writer.jar)=jars/ij.jar
 CLASSPATH(plugins/Calculator_Plus.jar)=jars/ij.jar
@@ -468,6 +467,7 @@ CLASSPATH(plugins/Fiji_Package_Maker.jar)=jars/ij.jar:plugins/Fiji_Updater.jar:j
 # pom.xml sub-projects
 
 jars/VIB-lib.jar <- src-plugins/VIB-lib/pom.xml
+jars/fiji-lib.jar <- src-plugins/fiji-lib/pom.xml
 
 # pre-Java5 generics ;-)
 
