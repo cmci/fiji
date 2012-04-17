@@ -545,12 +545,6 @@ public class Stitching_Grid implements PlugIn
 			if ( IJ.debugMode )
 				IJ.log( "numSeries:  " + numSeries );
 			
-			if ( numSeries == 1 )
-			{
-				IJ.log( "File contains only one tile: " + multiSeriesFile );
-				return null;
-			}
-			
 			// get maxZ
 			int dim = 2;
 			for ( int series = 0; series < numSeries; ++series )
@@ -560,19 +554,30 @@ public class Stitching_Grid implements PlugIn
 			if ( IJ.debugMode )
 				IJ.log( "dim:  " + dim );
 
+			final MetadataRetrieve retrieve = service.asRetrieve(r.getMetadataStore());
+			if ( IJ.debugMode )
+				IJ.log( "retrieve:  " + retrieve );
+
 			for ( int series = 0; series < numSeries; ++series )
 			{
 				if ( IJ.debugMode )
 					IJ.log( "fetching data for series:  " + series );
 				r.setSeries( series );
 
-				final MetadataRetrieve retrieve = service.asRetrieve(r.getMetadataStore());
+				final int sizeT = r.getSizeT();
+				if ( IJ.debugMode )
+					IJ.log( "sizeT:  " + sizeT );
+
+// CTR BEGIN LOOP
+				for ( int t = 0; t < sizeT; ++t ) {
+					final int planeIndex = r.getIndex(0, 0, t);
+// CTR BEGIN LOOP
 
 				// stage coordinates (per plane and series)
 				Double tmp;
 				double locationX, locationY, locationZ;
 				
-				tmp = retrieve.getPlanePositionX( series, 0 );
+				tmp = retrieve.getPlanePositionX( series, planeIndex );
 				if ( tmp != null )
 					locationX = tmp;
 				else
@@ -580,7 +585,7 @@ public class Stitching_Grid implements PlugIn
 				if ( IJ.debugMode )
 					IJ.log( "locationX:  " + locationX );
 				
-				tmp = retrieve.getPlanePositionY( series, 0 );
+				tmp = retrieve.getPlanePositionY( series, planeIndex );
 				if ( tmp != null )
 					locationY = tmp;
 				else
@@ -588,7 +593,7 @@ public class Stitching_Grid implements PlugIn
 				if ( IJ.debugMode )
 					IJ.log( "locationY:  " + locationY );
 				
-				tmp = retrieve.getPlanePositionZ( series, 0 );
+				tmp = retrieve.getPlanePositionZ( series, planeIndex );
 				if ( tmp != null )
 					locationZ = tmp;
 				else
@@ -641,23 +646,32 @@ public class Stitching_Grid implements PlugIn
 				// create ImageInformationList
 				
 				final ImageCollectionElement element;
+
+				// CTR HACK: for now, just to see if it works
+				// The problem is if we have multiple planes with multiple series;
+				// Then we must have two indices rather than only one
+				final int index = planeIndex > 0 ? planeIndex : series;
 				
 				if ( dim == 2 )
 				{
-					element = new ImageCollectionElement( new File( multiSeriesFile ), series );
+					element = new ImageCollectionElement( new File( multiSeriesFile ), index );
 					element.setModel( new TranslationModel2D() );
 					element.setOffset( new float[]{ (float)locationX, (float)locationY } );
 					element.setDimensionality( 2 );
 				}
 				else
 				{
-					element = new ImageCollectionElement( new File( multiSeriesFile ), series );
+					element = new ImageCollectionElement( new File( multiSeriesFile ), index );
 					element.setModel( new TranslationModel3D() );
 					element.setOffset( new float[]{ (float)locationX, (float)locationY, (float)locationZ } );
 					element.setDimensionality( 3 );
 				}
 				
 				elements.add( element );
+
+// CTR END LOOPS
+				}
+// CTR END LOOPS
 			}
 		}
 		catch ( Exception ex ) 
@@ -673,8 +687,9 @@ public class Stitching_Grid implements PlugIn
 		{
 			options = new ImporterOptions();
 			options.setId( new File( multiSeriesFile ).getAbsolutePath() );
+			// CTR HACK: assume each timepoint is a separate tile
 			options.setSplitChannels( false );
-			options.setSplitTimepoints( false );
+			options.setSplitTimepoints( true );
 			options.setSplitFocalPlanes( false );
 			options.setAutoscale( false );
 			
