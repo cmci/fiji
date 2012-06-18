@@ -105,14 +105,27 @@ public class BleachCorrection_SimpleRatio {
 				curip.setRoi(0, 0, imp.getWidth(), imp.getHeight());
 				if (i == 0) {
 					referenceInt = imgstat.mean - baselineInt;
+					if (referenceInt < 0) {
+						System.out.println("since mean intensity of " +
+								"the first frame is negative, " +
+								"reference level is set to the baseline");
+						referenceInt = 0;
+					}
 					curip.add(-1 * baselineInt);
 					System.out.println("ref intensity=" + imgstat.mean);
 				} else {
 					currentInt = imgstat.mean - baselineInt;
-					ratio = referenceInt / currentInt;
-					curip.add(-1 * baselineInt);
-					curip.multiply(ratio);
-					System.out.println("frame"+i+1+ "mean int="+ currentInt +  " ratio=" + ratio);
+					if (currentInt > 0 ) {
+						ratio = referenceInt / currentInt;
+						curip.add(-1 * baselineInt);
+						curip.multiply(ratio);
+						IJ.log("frame"+i+1+ "mean int="+ currentInt +  " ratio=" + ratio);
+
+					} else {
+						IJ.log("sicne mean intensity of frame " + 
+								Integer.toString(i) +
+								" is a negative value, no correction was made for this time point");						
+					}
 				}
 
 			}
@@ -129,17 +142,26 @@ public class BleachCorrection_SimpleRatio {
 				}
 				currentInt /= zframes;
 				currentInt -= baselineInt;
-
 				if (i == 0) {
+					if (currentInt < 0) currentInt = 0; // 20120618
 					referenceInt = currentInt;
 				} else {
-					ratio = referenceInt / currentInt;
-					for (int j = 0; j < zframes; j++) {
-						curip = imp.getImageStack().getProcessor(i * zframes + j + 1);
-						curip.setRoi(0, 0, imp.getWidth(), imp.getHeight());
-						curip.multiply(ratio);
+					if (currentInt > 0){
+						ratio = referenceInt / currentInt;
+						for (int j = 0; j < zframes; j++) {
+							curip = imp.getImageStack().getProcessor(i * zframes + j + 1);
+							curip.setRoi(0, 0, imp.getWidth(), imp.getHeight());
+							curip.multiply(ratio);
+						}
+						IJ.log("frame"+i+1+ ": mean int="+ currentInt +  " ratio=" + ratio);
+
+					} else {
+						IJ.log("No Correction: frame " + 
+								Integer.toString(i) +
+								".. mean int="+
+								Double.toString(currentInt)+
+								" <0, no correction");
 					}
-					System.out.println("frame"+i+1+ ": mean int="+ currentInt +  " ratio=" + ratio);
 				}
 			}
 		}

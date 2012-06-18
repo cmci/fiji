@@ -2,26 +2,30 @@ package emblcmci;
 
 /** Bleach Correction with three different methods, for 2D and 3D time series.
  * 	contact: Kota Miura (miura@embl.de)
- *
- * 	Simple Ratio Method:
- * 		Plugin version of Jens Rietdorf's macro, additionally with 3D time series
+ * 
+ * 	Simple Ratio Method: 
+ * 		Plugin version of Jens Rietdorf's macro, additionally with 3D time series 
  * 			see http://www.embl.de/eamnet/html/bleach_correction.html
  *
- *  Exponential Fitting Method:
- *  	Similar to MBF-ImageJ method, additionally with 3D time series.
+ *  Exponential Fitting Method (Frame-wise correction):
+ *  	Similar to MBF-ImageJ method, additionally with 3D time series. 
  *  		See http://www.macbiophotonics.ca/imagej/t.htm#t_bleach
- *  	MBF-ImageJ suggests to use "Exponential" equation for fitting,
+ *  	MBF-ImageJ suggests to use "Exponential" equation for fitting, 
  *  	whereas this plugin uses "Exponential with Offset"
- *
+ *      correction is made with a single ratio to whole frame
+ * 
+ *  Exponential Fitting Method (Under development, Pixel-wise correction):
+ *      Intensity of each pixel at the starting of the sequence is used for the estimation  
+ *  
  *  HIstogram Matching Method:
- *  	This method does much better restoration of bleaching sequence
- *  	for segmentation but might not good for intensity quantification.
+ *  	This method does much better restoration of bleaching sequence 
+ *  	for segmentation but might not good for intensity quantification.  
  *  	See documentation at http://cmci.embl.de
- *
- *
- * Copyright © 2010 Kota Miura
+ *  
+ *  
+ * Copyright 2010 Kota Miura
  * License: GPL 2
- *
+ *    
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License 2
  * as published by the Free Software Foundation.
@@ -30,8 +34,8 @@ package emblcmci;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
+ *   
+ * You should have received a copy of the GNU General Public License 
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
@@ -48,12 +52,17 @@ import emblcmci.BleachCorrection_SimpleRatio;
 
 public class BleachCorrection implements PlugInFilter {
 		ImagePlus imp;
-
-		String[] CorrectionMethods =  { "Simple Ratio", "Exponential Fit", "Histogram Matching" };
-
-		/**Correction Method  0: simple ratio 1: exponential fit 2: histogramMatch
+		
+		String[] CorrectionMethods =  { 
+				"Simple Ratio", 
+				"Exponential Fit",
+				"Exponential Fit (base subtraction)", 
+				"Exponential Fit (under construction)", 
+				"Histogram Matching" };
+		
+		/**Correction Method  0: simple ratio 1: exponential fit frame 2: exponential fit pixel 3: histogramMatch
 		*/
-		private static int CorrectionMethod = 0;
+		private static int CorrectionMethod = 0;  
 
 		@Override
 		public int setup(String arg, ImagePlus imp) {
@@ -70,7 +79,7 @@ public class BleachCorrection implements PlugInFilter {
 			//System.out.println("in the method");
 			if (curROI != null) {
 				java.awt.Rectangle rect = curROI.getBounds();
-				System.out.println("(x,y)=(" + rect.x + ","	+ rect.y);
+				System.out.println("(x,y)=(" + rect.x + ","	+ rect.y); 
 				System.out.println("Width="+ rect.width);
 				System.out.println("Height="+ rect.height);
 			} else {
@@ -88,7 +97,7 @@ public class BleachCorrection implements PlugInFilter {
 				}
 				BCSR.showDialogAskBaseline();
 				BCSR.correctBleach();
-			}
+			}	
 			else if (CorrectionMethod == 1){	//Exponential Fitting Method
 				BleachCorrection_ExpoFit BCEF;
 				if (curROI == null) {
@@ -96,34 +105,56 @@ public class BleachCorrection implements PlugInFilter {
 				} else {
 					BCEF = new BleachCorrection_ExpoFit(impdup, curROI);
 				}
-
+					
 				BCEF.core();
 			}
-			else if (CorrectionMethod == 2){	//HIstogram Matching Method
+			else if (CorrectionMethod == 2){	//Exponential Fitting (Double Fit) Method
+				BleachCorrection_ExpoFit BCEF;
+				if (curROI == null) {
+					BCEF = new BleachCorrection_ExpoFit(impdup);
+				} else {
+					BCEF = new BleachCorrection_ExpoFit(impdup, curROI);
+				}
+					
+				BCEF.coreSubtractBase();
+			}
+			//Exponential Fitting Method, experimental. Pixel-wise fitting. 
+			else if (CorrectionMethod == 3){	
+				BleachCorrection_ExpoFit BCEF;
+				if (curROI == null) {
+					BCEF = new BleachCorrection_ExpoFit(impdup);
+				} else {
+					BCEF = new BleachCorrection_ExpoFit(impdup, curROI);
+				}
+					
+				BCEF.coreTest();
+			}
+
+			else if (CorrectionMethod == 4){	//HIstogram Matching Method
 				BleachCorrection_MH BCMH = null;
 				//if (curROI == null) {
-					BCMH = new BleachCorrection_MH(impdup);
+					BCMH = new BleachCorrection_MH(impdup);				
 				//} else {
 				//	BCMH = new BleachCorrection_MH(impdup, curROI);
 				//}
-				BCMH.doCorrection();
+				BCMH.doCorrection();				
 			}
 			impdup.show();
 		}
-
+		
 		/**Dialog to ask which method to be used for Bleach Correction
-		 *
+		 * 
 		 * @return
 		 */
 		public boolean showDialog()	{
 			GenericDialog gd = new GenericDialog("Bleach Correction");
 			gd.addChoice("Correction Method :", CorrectionMethods , CorrectionMethods[CorrectionMethod]);
 			gd.showDialog();
-			if (gd.wasCanceled())
+			if (gd.wasCanceled()) 
 				return false;
 			BleachCorrection.setCorrectionMethod(gd.getNextChoiceIndex());
 			return true;
-
+			
 		}
 
 		public static int getCorrectionMethod() {
@@ -135,3 +166,4 @@ public class BleachCorrection implements PlugInFilter {
 		}
 
 }
+
